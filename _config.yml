@@ -80,7 +80,8 @@ theme: next
 ## Docs: https://hexo.io/docs/deployment.html
 deploy: 
     type: git   #有的版本是github也是个小坑，注意
-    repo: git@github.com:raiseyang/raiseyang.github.io.git
+    repo: git@git.coding.net:raise_yang/raise_yang.coding.me.git # ssh -T git@git.coding.net
+#    repo: git@github.com:raiseyang/raiseyang.github.io.git #  ssh -T git@github.com
     branch: master
 
 search:
