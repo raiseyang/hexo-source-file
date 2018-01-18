@@ -16,10 +16,12 @@ date: 2017-10-21 15:27:00
 - 一个Task由一个或者多个Action组成.
 - 在一个新建的默认的安卓项目中,默认存在2个Project:`project_name(root)`,`:app`
 - setting.gradle文件仅做配置project使用
-
 <!-- more -->
+
 ### Gradle执行阶段
-gradle运行将会分别执行2个阶段:`configuration`,`execution`;
+gradle运行将会分别执行3个阶段:`initialization`,`configuration`,`execution`.
+
+- `initialization`阶段将会识别所有project.
 在`configuration`阶段,会将所有的依赖,配置都同步完成,在`execution`阶段将会使用这些依赖,配置来构建具体任务;
 在`configuration`阶段执行完成之后,`execution`阶段才会执行;
 比如:
@@ -45,10 +47,9 @@ configuration phase exec 2.
 execution phase exec a.
 execution phase exec b.
 ```
-
+所以在自定义Task时,编写的代码需要区分到底是在哪个阶段运行.
 ### Task
-一个task是一个单一的构建任务,一次build中,通常会执行多个task,比如:编译生成classes,生成javaDoc文档;
-一个task属于某个具体的project中,所以在编译时不同的project通常会执行同一个task;
+一个task是一个单一的构建任务,一次build任务执行时,通常会执行多个task,比如:编译生成classes,生成javaDoc文档等等;
 通常我们这样创建task:
 ```
 task myTask
@@ -72,6 +73,7 @@ BUILD SUCCESSFUL in 1s
 7 actionable tasks: 7 executed
 ```
 可以发现命名规则为:`:project_name:task_name`
+一个task属于某个具体的project中,不同的project通常会包含同一个task,比如build;
 
 ### Task Actions
 一个task由众多`Action`组成,当一个任务执行时,每个`Action`将依次执行;我们也可以自己添加`Action`,最常见的就是`doFirst`,`doLast`;
@@ -274,3 +276,4 @@ task taskY {
 参考:
 [Gradle Task](https://docs.gradle.org/current/dsl/org.gradle.api.Task.html)
 https://docs.gradle.org/current/userguide/tutorial_using_tasks.html
+[more_about_tasks](https://docs.gradle.org/4.2.1/userguide/more_about_tasks.html#declareTask)

@@ -212,6 +212,10 @@ BUILD SUCCESSFUL in 2s
 ```
 `java`插件内增加了`Build Tasks`任务集,里面的`jar`任务用来打包jar包,`assemble`任务用来输出所有文件.
 
+## 配置
+gradle将在C盘缓存大量的文件,建议设置缓存路径:
+http://blog.csdn.net/yanzi1225627/article/details/52024632
+
 ## 小结
 - gradle环境搭建
 - gradle -v # 查看gradle版本号

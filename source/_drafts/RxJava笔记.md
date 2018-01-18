@@ -153,5 +153,32 @@ Observable<Integer> integerObservable = Observable.create(new ObservableOnSubscr
 ```
 
 
+## concat
+```
+//1
+Observable<Integer> o1 = Observable.just(1)
+        .delay(5, TimeUnit.SECONDS);
+Observable<Integer> o2 = Observable.just(2);
+Observable.concat(o1, o2)
+        .doOnNext(o -> logger.debug(o))
+        .subscribe();
+//2
+Observable<Integer> o1 = Observable.just(1)
+        .delay(5, TimeUnit.SECONDS);
+Observable<Integer> o2 = Observable.just(2);
+Observable.concat(o2, o1)
+        .doOnNext(o -> logger.debug(o))
+        .subscribe();
+```
+
+```
+//1
+19:54:16.583 RxComputationThreadPool-1 1
+19:54:16.583 RxComputationThreadPool-1 2
+//2
+19:52:19.105 main 2
+19:52:24.125 RxComputationThreadPool-1 1
+```
+组合2个Observable到一块发射,严格按照先后顺序发射;
 # 参考资料
 [简书RxJava2专题](http://www.jianshu.com/c/299d0a51fdd4)
